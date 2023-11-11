@@ -1,14 +1,72 @@
-
 def addNewLine():
   print('\n')
 
+
 def validateSelectedChoice(choice):
   if choice.isnumeric() and (0 < int(choice) < 10):
-    print('You entered a correct choice')
+    applySelectedChoice(int(choice))
   else:
     print('Please enter a valid choice to proceed !')
     validateSelectedChoice(input())
-  
+
+
+def applySelectedChoice(choice):
+  if choice == 1:
+    openTab()
+  elif choice == 2:
+    closeTab()
+  elif choice == 3:
+    switchTab()
+  elif choice == 4:
+    displayAllTabs()
+  elif choice == 5:
+    openNestedTabs()
+  elif choice == 6:
+    clearAllTabs()
+  elif choice == 7:
+    saveTabs()
+  elif choice == 8:
+    importTabs()
+  elif choice == 9:
+    exitApplication()
+
+
+def openTab():
+  print('Open tab activated')
+
+
+def closeTab():
+  print('Close tab activated')
+
+
+def switchTab():
+  print('Switch tab activated')
+
+
+def displayAllTabs():
+  print('Display all tabs activated')
+
+
+def openNestedTabs():
+  print('Open Nested Tabs activated')
+
+
+def clearAllTabs():
+  print('Clear all tabs activated')
+
+
+def saveTabs():
+  print('Save Tabs activated')
+
+
+def importTabs():
+  print('Import tabs activated')
+
+
+def exitApplication():
+  print('Exit the application')
+
+
 print('Welcome to the advanced browser tabs simulation.')
 addNewLine()
 print('1. Open Tab')
@@ -23,4 +81,3 @@ print('9. Exit')
 addNewLine()
 print('Please enter your choice: ')
 validateSelectedChoice(input())
-
