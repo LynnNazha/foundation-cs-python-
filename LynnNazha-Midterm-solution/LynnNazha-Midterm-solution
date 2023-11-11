@@ -1,3 +1,6 @@
+allTabs = []
+
+
 def addNewLine():
   print('\n')
 
@@ -31,8 +34,20 @@ def applySelectedChoice(choice):
     exitApplication()
 
 
+def getValidatedInput(text):
+  value = input(text)
+  if value:
+    return value
+  else:
+    return getValidatedInput(text)
+
+
 def openTab():
-  print('Open tab activated')
+  title = getValidatedInput('Enter the title of the tab to open: ')
+  url = getValidatedInput('Enter the url of the tab to open: ')
+  allTabs.append({'title': title, 'url': url, 'nestedTabs': []})
+  print('The tab is opened successfully !')
+  main()
 
 
 def closeTab():
@@ -67,17 +82,21 @@ def exitApplication():
   print('Exit the application')
 
 
+def main():
+  addNewLine()
+  print('1. Open Tab')
+  print('2. Close Tab')
+  print('3. Switch Tab')
+  print('4. Display All Tabs')
+  print('5. Open Nested Tab')
+  print('6. Clear All Tabs')
+  print('7. Save Tabs')
+  print('8. Import Tabs')
+  print('9. Exit')
+  addNewLine()
+  print('Please enter your choice: ')
+  validateSelectedChoice(input())
+
+
 print('Welcome to the advanced browser tabs simulation.')
-addNewLine()
-print('1. Open Tab')
-print('2. Close Tab')
-print('3. Switch Tab')
-print('4. Display All Tabs')
-print('5. Open Nested Tab')
-print('6. Clear All Tabs')
-print('7. Save Tabs')
-print('8. Import Tabs')
-print('9. Exit')
-addNewLine()
-print('Please enter your choice: ')
-validateSelectedChoice(input())
+main()
