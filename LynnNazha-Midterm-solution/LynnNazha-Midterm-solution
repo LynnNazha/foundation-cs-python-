@@ -35,7 +35,7 @@ def applySelectedChoice(choice):
   elif choice == 8:
     importTabs()
   elif choice == 9:
-    exitApplication()
+    exit()
 
 
 def getNonEmptyInput(text):
@@ -140,10 +140,6 @@ def importTabs():
     allTabs.extend(json.load(file))
   print('The tabs are imported successfully!')
   main()
-
-
-def exitApplication():
-  print('Exit the application')
 
 
 def main():
