@@ -1,4 +1,7 @@
+import json
 import requests
+
+
 
 allTabs = []
 
@@ -123,7 +126,11 @@ def clearAllTabs():
 
 
 def saveTabs():
-  print('Save Tabs activated')
+  filePath = getNonEmptyInput('Enter the file path to save the tabs: ')
+  with open(filePath, 'w') as file:
+    json.dump(allTabs, file)
+  print('The tabs are saved successfully!')
+  main()
 
 
 def importTabs():
