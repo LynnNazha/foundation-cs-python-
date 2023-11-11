@@ -1,5 +1,7 @@
 import json
 import requests
+import validators
+import os
 
 allTabs = []
 
@@ -56,10 +58,33 @@ def getValidTabIndex(text):
     return getValidTabIndex(text)
 
 
+def getValidUrl(text):
+  url = input(text)
+  if validators.url(url):
+    return url
+  else:
+    return getValidUrl(text)
+
+
+def checkFilePathIfExists(text):
+  path = input(text)
+  if os.path.exists(path):
+    return path
+  else:
+    return checkFilePathIfExists(text)
+
+
+def getValidPath(text):
+  path = input(text)
+  if path and path.endswith('.json'):
+    return path
+  else:
+    return getValidPath(text)
+
+
 def openTab():
   title = getNonEmptyInput('Enter the title of the tab to open: ')
-  url = getNonEmptyInput('Enter the url of the tab to open: ')
-  #Check if the URL is valid or not
+  url = getValidUrl('Enter the url of the tab to open: ')
   allTabs.append({'title': title, 'url': url, 'nestedTabs': []})
   print('The tab is opened successfully !')
   main()
@@ -110,8 +135,7 @@ def openNestedTabs():
   tabIndex = getValidTabIndex(
       'Enter the index of the tab to open nested tabs: ')
   title = getNonEmptyInput('Enter the title of the tab to open: ')
-  url = getNonEmptyInput('Enter the url of the tab to open: ')
-  #Check if the URL is valid or not
+  url = getValidUrl('Enter the url of the tab to open: ')
   allTabs[tabIndex]['nestedTabs'].append({'title': title, 'url': url})
   print('This tab is added under the parent tab with index ', tabIndex)
   main()
@@ -124,8 +148,7 @@ def clearAllTabs():
 
 
 def saveTabs():
-  #validate the file path and file extension
-  filePath = getNonEmptyInput('Enter the file path to save the tabs: ')
+  filePath = getValidPath('Enter the file path to save the tabs: ')
   with open(filePath, 'w') as file:
     json.dump(allTabs, file)
   print('The tabs are saved successfully!')
@@ -133,8 +156,7 @@ def saveTabs():
 
 
 def importTabs():
-  #validate the file path and file extension
-  filePath = getNonEmptyInput('Enter the file path to import the tabs: ')
+  filePath = checkFilePathIfExists('Enter the file path to import the tabs: ')
   with open(filePath, 'r') as file:
     allTabs.clear()
     allTabs.extend(json.load(file))
