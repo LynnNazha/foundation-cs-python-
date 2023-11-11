@@ -117,7 +117,9 @@ def openNestedTabs():
 
 
 def clearAllTabs():
-  print('Clear all tabs activated')
+  allTabs.clear()
+  print('All the tabs are deleted!')
+  main()
 
 
 def saveTabs():
