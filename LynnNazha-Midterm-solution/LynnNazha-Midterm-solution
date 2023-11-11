@@ -58,6 +58,7 @@ def getValidTabIndex(text):
 def openTab():
   title = getNonEmptyInput('Enter the title of the tab to open: ')
   url = getNonEmptyInput('Enter the url of the tab to open: ')
+  #Check if the URL is valid or not
   allTabs.append({'title': title, 'url': url, 'nestedTabs': []})
   print('The tab is opened successfully !')
   main()
@@ -105,7 +106,14 @@ def displayAllTabs():
 
 
 def openNestedTabs():
-  print('Open Nested Tabs activated')
+  tabIndex = getValidTabIndex(
+      'Enter the index of the tab to open nested tabs: ')
+  title = getNonEmptyInput('Enter the title of the tab to open: ')
+  url = getNonEmptyInput('Enter the url of the tab to open: ')
+  #Check if the URL is valid or not
+  allTabs[tabIndex]['nestedTabs'].append({'title': title, 'url': url})
+  print('This tab is added under the parent tab with index ', tabIndex)
+  main()
 
 
 def clearAllTabs():
