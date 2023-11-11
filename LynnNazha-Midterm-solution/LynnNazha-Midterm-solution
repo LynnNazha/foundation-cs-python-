@@ -1,3 +1,5 @@
+import requests
+
 allTabs = []
 
 
@@ -65,6 +67,7 @@ def closeTab():
   if (len(allTabs) > 0):
     tabIndex = getValidTabIndex('Enter the index of the tab to close: ')
     del allTabs[tabIndex]
+    addNewLine()
     print('The tab at index ', tabIndex, ' is closed successfully!')
     main()
   else:
@@ -73,7 +76,18 @@ def closeTab():
 
 
 def switchTab():
-  print('Switch tab activated')
+  if (len(allTabs) > 0):
+    tabIndex = getValidTabIndex('Enter the index of the tab to display: ')
+    addNewLine()
+    print('Title : ', allTabs[tabIndex]['title'])
+    print('URL : ', allTabs[tabIndex]['url'])
+    print('URL HTML Content:')
+    addNewLine()
+    print(requests.get(allTabs[tabIndex]['url']).text)
+    main()
+  else:
+    print('There is no tab to display !')
+    main()
 
 
 def displayAllTabs():
