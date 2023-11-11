@@ -10,6 +10,7 @@ def validateSelectedChoice(choice):
     applySelectedChoice(int(choice))
   else:
     print('Please enter a valid choice to proceed !')
+    main()
     validateSelectedChoice(input())
 
 
@@ -34,24 +35,41 @@ def applySelectedChoice(choice):
     exitApplication()
 
 
-def getValidatedInput(text):
+def getNonEmptyInput(text):
   value = input(text)
   if value:
     return value
   else:
-    return getValidatedInput(text)
+    return getNonEmptyInput(text)
+
+
+def getValidTabIndex(text):
+  index = input(text)
+  if not index:
+    return len(allTabs) - 1
+  elif index.isnumeric() and 0 <= int(index) < len(allTabs):
+    return int(index)
+  else:
+    return getValidTabIndex(text)
 
 
 def openTab():
-  title = getValidatedInput('Enter the title of the tab to open: ')
-  url = getValidatedInput('Enter the url of the tab to open: ')
+  title = getNonEmptyInput('Enter the title of the tab to open: ')
+  url = getNonEmptyInput('Enter the url of the tab to open: ')
   allTabs.append({'title': title, 'url': url, 'nestedTabs': []})
   print('The tab is opened successfully !')
   main()
 
 
 def closeTab():
-  print('Close tab activated')
+  if (len(allTabs) > 0):
+    tabIndex = getValidTabIndex('Enter the index of the tab to close: ')
+    del allTabs[tabIndex]
+    print('The tab at index ', tabIndex, ' is closed successfully!')
+    main()
+  else:
+    print('There is no tab to close !')
+    main()
 
 
 def switchTab():
