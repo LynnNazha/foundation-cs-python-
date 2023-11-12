@@ -124,7 +124,7 @@ def openNestedTabs():
   print('This tab is added under the parent tab with index ', tabIndex)
   main()
 
-
+#this function clear the alltabs list
 def clearAllTabs():
   allTabs.clear()
   print('All the tabs are deleted!')
