@@ -149,7 +149,8 @@ def importTabs():
   print('The tabs are imported successfully!')
   main()
 
-#this main function is to display the valid options to the user and to propmts the user to enter a valid choice
+#this main function is to display the valid options to the user and to prompts the user to enter a valid choice
+# I called the main function in each function related to the options to display the menu and prompt the user to enter a choice
 def main():
   addNewLine()
   print('1. Open Tab')
