@@ -18,7 +18,7 @@ def validateSelectedChoice(choice):
     main()
     validateSelectedChoice(input())
 
-#function to apply choice entered by user
+#function to apply choice entered by user 
 def applySelectedChoice(choice):
   if choice == 1:
     openTab()
@@ -149,7 +149,7 @@ def importTabs():
   print('The tabs are imported successfully!')
   main()
 
-#this main function is to display the valid options to the user 
+#this main function is to display the valid options to the user and to propmts the user to enter a valid choice
 def main():
   addNewLine()
   print('1. Open Tab')
