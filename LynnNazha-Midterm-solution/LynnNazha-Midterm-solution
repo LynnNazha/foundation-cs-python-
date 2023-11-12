@@ -66,10 +66,6 @@ def getValidUrl(text):
   else:
     return getValidUrl(text)
 
-
-
-
-
 #this function prompts the user to enter the title and the url of the tab he wants to open
 def openTab():
   title = getNonEmptyInput('Enter the title of the tab to open: ')
@@ -78,7 +74,7 @@ def openTab():
   print('The tab is opened successfully !')
   main()
 
-
+#this function prompts the user to enter the index of thetab he wants to close if len(allTabs) > 0 
 def closeTab():
   if (len(allTabs) > 0):
     tabIndex = getValidTabIndex('Enter the index of the tab to close: ')
