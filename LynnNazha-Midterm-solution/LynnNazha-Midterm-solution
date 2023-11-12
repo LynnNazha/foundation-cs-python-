@@ -86,7 +86,7 @@ def closeTab():
     print('There is no tab to close !')
     main()
 
-
+#this function allow the user to enter an index of a tab to display the content (html content) of that tab
 def switchTab():
   if (len(allTabs) > 0):
     tabIndex = getValidTabIndex('Enter the index of the tab to display: ')
