@@ -48,7 +48,7 @@ def getNonEmptyInput(text):
   else:
     return getNonEmptyInput(text)
 
-
+#function to check the index entered by user , if the user didnot enter any index it will return the last opened tab elif he enterd a valid index it will return at that index , else if the index entered is not numeric or not in the range it will call itself untill the condition is met
 def getValidTabIndex(text):
   index = input(text)
   if not index:
