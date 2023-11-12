@@ -1,3 +1,8 @@
+import json
+import requests
+import validators
+import os
+
 allTabs = []
 
 
@@ -34,7 +39,7 @@ def applySelectedChoice(choice):
   elif choice == 9:
     exit()
 
-
+#function that checks if the user press enter and not enter anything
 def getNonEmptyInput(text):
   value = input(text)
   if value:
