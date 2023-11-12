@@ -1,8 +1,3 @@
-import json
-import requests
-import validators
-import os
-
 allTabs = []
 
 
@@ -18,7 +13,7 @@ def validateSelectedChoice(choice):
     main()
     validateSelectedChoice(input())
 
-
+#function to apply choice entered by user
 def applySelectedChoice(choice):
   if choice == 1:
     openTab()
