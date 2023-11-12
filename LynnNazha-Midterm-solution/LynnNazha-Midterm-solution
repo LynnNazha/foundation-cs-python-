@@ -139,7 +139,7 @@ def saveTabs():
   print('The tabs are saved successfully!')
   main()
 
-
+#this function imports the tabs that are written or saved in the json file
 def importTabs():
   print('Import tabs activated')
   filePath = getNonEmptyInput('Enter the file path to import the tabs: ')
