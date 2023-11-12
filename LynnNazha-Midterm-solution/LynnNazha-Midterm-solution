@@ -1,0 +1,171 @@
+import json
+import requests
+import validators
+import os
+
+allTabs = []
+
+
+def addNewLine():
+  print('\n')
+
+#function to check if the choice is numeric and between 0 and 10, if it is not, it will ask the user for valid choice untill the condition is reached
+def validateSelectedChoice(choice):
+  if choice.isnumeric() and (0 < int(choice) < 10):
+    applySelectedChoice(int(choice))
+  else:
+    print('Please enter a valid choice to proceed !')
+    main()
+    validateSelectedChoice(input())
+
+#function to apply choice entered by user 
+def applySelectedChoice(choice):
+  if choice == 1:
+    openTab()
+  elif choice == 2:
+    closeTab()
+  elif choice == 3:
+    switchTab()
+  elif choice == 4:
+    displayAllTabs()
+  elif choice == 5:
+    openNestedTabs()
+  elif choice == 6:
+    clearAllTabs()
+  elif choice == 7:
+    saveTabs()
+  elif choice == 8:
+    importTabs()
+  elif choice == 9:
+    exit()
+
+#function that checks if the user press enter and not enter anything
+#it will call itself untill the user enters something(recursive)
+def getNonEmptyInput(text):
+  value = input(text)
+  if value:
+    return value
+  else:
+    return getNonEmptyInput(text)
+
+#function to check the index entered by user , if the user didnot enter any idex it will return the last index elif he enterd a valid index it will return at that index , else if the index entered is not numeric or not in the range it will call itself untill the condition is met
+def getValidTabIndex(text):
+  index = input(text)
+  if not index:
+    return len(allTabs) - 1
+  elif index.isnumeric() and 0 <= int(index) < len(allTabs):
+    return int(index)
+  else:
+    return getValidTabIndex(text)
+
+#this function checks if the user enters a valid url ex: https://www.google.com
+def getValidUrl(text):
+  url = input(text)
+  if validators.url(url):
+    return url
+  else:
+    return getValidUrl(text)
+
+#this function prompts the user to enter the title and the url of the tab he wants to open
+def openTab():
+  title = getNonEmptyInput('Enter the title of the tab to open: ')
+  url = getValidUrl('Enter the url of the tab to open: ')
+  allTabs.append({'title': title, 'url': url, 'nestedTabs': []})
+  print('The tab is opened successfully !')
+  main()
+
+#this function prompts the user to enter the index of thetab he wants to close if len(allTabs) > 0 
+def closeTab():
+  if (len(allTabs) > 0):
+    tabIndex = getValidTabIndex('Enter the index of the tab to close: ')
+    del allTabs[tabIndex]
+    addNewLine()
+    print('The tab at index ', tabIndex, ' is closed successfully!')
+    main()
+  else:
+    print('There is no tab to close !')
+    main()
+
+#this function allow the user to enter an index of a tab to display the content (html content) of that tab
+def switchTab():
+  if (len(allTabs) > 0):
+    tabIndex = getValidTabIndex('Enter the index of the tab to display: ')
+    addNewLine()
+    print('Title : ', allTabs[tabIndex]['title'])
+    print('URL : ', allTabs[tabIndex]['url'])
+    print('URL HTML Content:')
+    addNewLine()
+    print(requests.get(allTabs[tabIndex]['url']).text)
+    main()
+  else:
+    print('There is no tab to display !')
+    main()
+
+#this function allow the user to enter an index of a tab to display it's nested tabs
+def displayAllTabs():
+  if (len(allTabs) > 0):
+    addNewLine()
+    for index, tab in enumerate(allTabs):
+      print('Tab ', index, ' : ', tab['title'])
+      if (len(tab['nestedTabs']) > 0):
+        for nestedTab in tab['nestedTabs']:
+          print('---- ', nestedTab['title'])
+    main()
+  else:
+    print('There is no tabs to display!')
+    main()
+
+#this function promts the user to enter an index of a tab  and to input a title and url for a tab that will be added under the index of the tab he enntered(nested tab)
+def openNestedTabs():
+  tabIndex = getValidTabIndex('Enter the index of the tab to open nested tabs: ')
+  title = getNonEmptyInput('Enter the title of the tab to open: ')
+  url = getValidUrl('Enter the url of the tab to open: ')
+  allTabs[tabIndex]['nestedTabs'].append({'title': title, 'url': url})
+  print('This tab is added under the parent tab with index ', tabIndex)
+  main()
+
+#this function clear the alltabs list
+def clearAllTabs():
+  allTabs.clear()
+  print('All the tabs are deleted!')
+  main()
+
+#this function save the tabs entered by user (input tabs) in a jsonfile
+def saveTabs():
+  print('Save Tabs activated')
+  filePath = getNonEmptyInput('Enter the file path to save the tabs: ')
+  with open(filePath, 'w') as file:
+    json.dump(allTabs, file)
+  print('The tabs are saved successfully!')
+  main()
+
+#this function imports the tabs that are written or saved in the json file
+def importTabs():
+  print('Import tabs activated')
+  filePath = getNonEmptyInput('Enter the file path to import the tabs: ')
+  with open(filePath, 'r') as file:
+    allTabs.clear()
+    allTabs.extend(json.load(file))
+  print('The tabs are imported successfully!')
+  main()
+
+#this main function is to display the valid options to the user and to prompts the user to enter a valid choice
+# I called the main function in each function related to the options to display the menu and prompt the user to enter a choice
+def main():
+  addNewLine()
+  print('1. Open Tab')
+  print('2. Close Tab')
+  print('3. Switch Tab')
+  print('4. Display All Tabs')
+  print('5. Open Nested Tab')
+  print('6. Clear All Tabs')
+  print('7. Save Tabs')
+  print('8. Import Tabs')
+  print('9. Exit')
+  addNewLine()
+  print('Please enter your choice: ')
+  validateSelectedChoice(input())
+
+
+print('Welcome to the advanced browser tabs simulation.')
+main()
