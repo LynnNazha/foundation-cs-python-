@@ -149,7 +149,7 @@ def importTabs():
   print('The tabs are imported successfully!')
   main()
 
-
+#this main function is to display the valid options to the user 
 def main():
   addNewLine()
   print('1. Open Tab')
