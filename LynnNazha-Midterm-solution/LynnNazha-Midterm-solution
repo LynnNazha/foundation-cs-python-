@@ -9,7 +9,7 @@ allTabs = []
 def addNewLine():
   print('\n')
 
-#function to check if the choice is numeric and between 0 and 10
+#function to check if the choice is numeric and between 0 and 10, if it is not, it will ask the user for valid choice untill the condition is reached
 def validateSelectedChoice(choice):
   if choice.isnumeric() and (0 < int(choice) < 10):
     applySelectedChoice(int(choice))
