@@ -130,7 +130,7 @@ def clearAllTabs():
   print('All the tabs are deleted!')
   main()
 
-
+#this function save the tabs entered by user (input tabs) in a jsonfile
 def saveTabs():
   print('Save Tabs activated')
   filePath = getNonEmptyInput('Enter the file path to save the tabs: ')
@@ -141,7 +141,8 @@ def saveTabs():
 
 
 def importTabs():
-  filePath = checkFilePathIfExists('Enter the file path to import the tabs: ')
+  print('Import tabs activated')
+  filePath = getNonEmptyInput('Enter the file path to import the tabs: ')
   with open(filePath, 'r') as file:
     allTabs.clear()
     allTabs.extend(json.load(file))
