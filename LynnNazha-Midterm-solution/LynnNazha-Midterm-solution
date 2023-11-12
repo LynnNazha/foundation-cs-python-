@@ -40,6 +40,7 @@ def applySelectedChoice(choice):
     exit()
 
 #function that checks if the user press enter and not enter anything
+#it will call itself untill the user enters something(recursive)
 def getNonEmptyInput(text):
   value = input(text)
   if value:
