@@ -115,10 +115,9 @@ def displayAllTabs():
     print('There is no tabs to display!')
     main()
 
-
+#this function promts the user to enter an index of a tab  and to input a title and url for a tab that will be added under the index of the tab he enntered(nested tab)
 def openNestedTabs():
-  tabIndex = getValidTabIndex(
-      'Enter the index of the tab to open nested tabs: ')
+  tabIndex = getValidTabIndex('Enter the index of the tab to open nested tabs: ')
   title = getNonEmptyInput('Enter the title of the tab to open: ')
   url = getValidUrl('Enter the url of the tab to open: ')
   allTabs[tabIndex]['nestedTabs'].append({'title': title, 'url': url})
