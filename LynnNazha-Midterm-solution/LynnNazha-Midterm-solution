@@ -101,7 +101,7 @@ def switchTab():
     print('There is no tab to display !')
     main()
 
-
+#this function allow the user to enter an index of a tab to display it's nested tabs
 def displayAllTabs():
   if (len(allTabs) > 0):
     addNewLine()
